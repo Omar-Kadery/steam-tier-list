@@ -1,5 +1,24 @@
 <script>
   import Tier from "../components/Tier.svelte";
+  import { onMount } from "svelte";
+  import * as api from "../constants/api.json";
+
+  let resData = [];
+
+  onMount(async () => {
+    const response = await fetch(
+      api.api_url +
+        new URLSearchParams({
+          key: api.api_key,
+          steamid: "76561198042893204",
+          format: "json",
+          include_appinfo: "true",
+        }),
+      {
+        method: "GET",
+      }
+    );
+  });
 
   let items = [
     { id: 11, name: "item11" },

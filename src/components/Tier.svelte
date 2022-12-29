@@ -3,6 +3,8 @@
 
   import { flip } from "svelte/animate";
   import { dndzone } from "svelte-dnd-action";
+  import * as api from "../constants/api.json";
+
   export let items = [];
   export let containerWidth = "200vw";
   let randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
@@ -14,6 +16,31 @@
   function handleDndFinalize(e) {
     items = e.detail.items;
   }
+
+  const itemBackground = async (id) => {
+    let style = await fetch(
+      api.cover_url +
+        new URLSearchParams({
+          appid: id,
+        }),
+      {
+        method: "GET",
+      }
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.statusCode === 200) {
+          return `background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${id}/library_600x900.jpg'); background-size: cover`;
+        } else {
+          return `background-color: #${randomColor()}`;
+        }
+      });
+
+    console.log(style);
+    return style;
+  };
 </script>
 
 <section
@@ -26,10 +53,8 @@
     <div
       class="item"
       animate:flip={{ duration: flipDurationMs }}
-      style="background-color: #{randomColor()}"
-    >
-      {item.name}
-    </div>
+      style={itemBackground(item.id)}
+    />
   {/each}
 </section>
 

@@ -4,6 +4,7 @@
   import { flip } from "svelte/animate";
   import { dndzone } from "svelte-dnd-action";
   import * as api from "../constants/api.json";
+  import { error } from "@sveltejs/kit";
 
   export let items = [];
   export let containerWidth = "200vw";
@@ -18,7 +19,7 @@
   }
 
   const itemBackground = async (id) => {
-    let style = await fetch(
+    let haveArt = await fetch(
       api.cover_url +
         new URLSearchParams({
           appid: id,
@@ -31,15 +32,20 @@
         return response.json();
       })
       .then(function (data) {
-        if (data.statusCode === 200) {
-          return `background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${id}/library_600x900.jpg'); background-size: cover`;
-        } else {
-          return `background-color: #${randomColor()}`;
-        }
+        return data.statusCode === 200;
+        // if (data.statusCode === 200) {
+        //   return `background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${id}/library_600x900.jpg'); background-size: cover`;
+        // } else {
+        //   return `background-color: #${randomColor()}`;
+        // }
+      })
+      .catch((error) => {
+        return false;
       });
 
-    console.log(style);
-    return style;
+    // return style;
+
+    return haveArt;
   };
 </script>
 
@@ -53,7 +59,9 @@
     <div
       class="item"
       animate:flip={{ duration: flipDurationMs }}
-      style={itemBackground(item.id)}
+      style={itemBackground(item.id)
+        ? `background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${item.id}/library_600x900.jpg'); background-size: cover`
+        : `background-color: #${randomColor()}`}
     />
   {/each}
 </section>

@@ -20,7 +20,7 @@
       })
       .then(function (data) {
         items = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < /*data.response.games.length*/ 30; i++) {
           items.push({
             id: Number(data.response.games[i].appid),
             name: data.response.games[i].name,

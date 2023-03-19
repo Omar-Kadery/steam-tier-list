@@ -7,7 +7,7 @@
   import { error } from "@sveltejs/kit";
 
   export let items = [];
-  export let containerWidth = "200vw";
+  export let containerWidth = "100vw";
   let randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
   const flipDurationMs = 300;
@@ -17,36 +17,6 @@
   function handleDndFinalize(e) {
     items = e.detail.items;
   }
-
-  const itemBackground = async (id) => {
-    let haveArt = await fetch(
-      api.cover_url +
-        new URLSearchParams({
-          appid: id,
-        }),
-      {
-        method: "GET",
-      }
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then(function (data) {
-        return data.statusCode === 200;
-        // if (data.statusCode === 200) {
-        //   return `background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${id}/library_600x900.jpg'); background-size: cover`;
-        // } else {
-        //   return `background-color: #${randomColor()}`;
-        // }
-      })
-      .catch((error) => {
-        return false;
-      });
-
-    // return style;
-
-    return haveArt;
-  };
 </script>
 
 <section
@@ -58,10 +28,9 @@
   {#each items as item (item.id)}
     <div
       class="item"
+      title="${item.name}"
       animate:flip={{ duration: flipDurationMs }}
-      style={itemBackground(item.id)
-        ? `background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${item.id}/library_600x900.jpg'); background-size: cover`
-        : `background-color: #${randomColor()}`}
+      style={`background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${item.id}/library_600x900.jpg'); background-size: cover`}
     />
   {/each}
 </section>

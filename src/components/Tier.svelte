@@ -37,7 +37,7 @@
         class="item"
         title="${item.name}"
         animate:flip={{ duration: flipDurationMs }}
-        style={`background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${item.id}/library_600x900.jpg'); background-size: cover`}
+        style={`background-image: url('https://steamcdn-a.akamaihd.net/steam/apps/${item.id}/library_600x900.jpg'), url('/images/steamlogo.png'); background-size: cover`}
       />
     {/each}
   </section>

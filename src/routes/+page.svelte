@@ -5,12 +5,13 @@
   import InitZone from "../components/InitZone.svelte";
 
   let items = [{ id: 1, name: "" }];
+  let steamid = "76561198042893204";
 
   onMount(async () => {
     fetch(
       api.api_url +
         new URLSearchParams({
-          steamid: "76561198042893204",
+          steamid,
         }),
       {
         method: "GET",
@@ -21,7 +22,7 @@
       })
       .then(function (data) {
         items = [];
-        for (let i = 0; i < /*data.response.games.length*/ 30; i++) {
+        for (let i = 0; i < data.response.games.length; i++) {
           items.push({
             id: Number(data.response.games[i].appid),
             name: data.response.games[i].name,

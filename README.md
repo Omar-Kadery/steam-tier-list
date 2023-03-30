@@ -4,3 +4,5 @@ Simple app I built while learning Svelte. Input SteamId and it generates a tier 
 
 Needs Steam Tier List Server (but can definitely be refactored to not need it).
 
+Requires some configuration.
+

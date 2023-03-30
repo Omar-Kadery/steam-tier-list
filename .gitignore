@@ -8,5 +8,4 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-src/constants/apikey.json
-src/constants/key.json
+src/constants/api.json

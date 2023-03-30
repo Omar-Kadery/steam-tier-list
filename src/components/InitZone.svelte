@@ -3,8 +3,6 @@
 
   import { flip } from "svelte/animate";
   import { dndzone } from "svelte-dnd-action";
-  import * as api from "../constants/api.json";
-  import { error } from "@sveltejs/kit";
 
   export let items = [];
   export let containerWidth = "100vw";

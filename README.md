@@ -2,7 +2,7 @@
 
 Simple app I built while learning Svelte. Input SteamId and it generates a tier list where you can rank all your games. Pretty sure it needs your profile to be public. Uses svelte-dnd.
 
-Needs Steam Tier List Server (but can definitely be refactored to not need it).
+Needs [Steam Tier List Server](https://github.com/Omar-Kadery/steam-tier-list-server).
 
 **Prerequisites:**
 - An **[API Key](https://steamcommunity.com/login/home/?goto=%2Fdev%2Fapikey)** for your Steam account

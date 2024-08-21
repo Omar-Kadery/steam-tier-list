@@ -4,6 +4,7 @@
     import Tier from "../../../components/Tier.svelte";
     import { onMount } from "svelte";
     import InitZone from "../../../components/InitZone.svelte";
+    import api from "../../../constants/api.json";
 
     export let data;
 
@@ -12,7 +13,7 @@
 
     onMount(async () => {
         fetch(
-            "http://134.209.72.209:2375/games?" +
+            api.url +
                 new URLSearchParams({
                     steamid,
                 }),
